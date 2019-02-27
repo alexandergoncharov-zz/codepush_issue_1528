@@ -14,4 +14,4 @@
 
 
 # Description
-This demo project just verification [this issue](https://github.com/Microsoft/react-native-code-push/issues/1528)
+This demo project just verification [this issue](https://github.com/Microsoft/react-native-code-push/issues/1528), and recorded video is easy to find out.
