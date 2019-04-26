@@ -21,52 +21,41 @@ const instructions = Platform.select({
 type Props = {};
 class App extends Component<Props> {
   componentWillMount () {
-    codePush.checkForUpdate().then(
-      (update) => {
-        Alert.alert(`update: ${JSON.stringify(update)}`)
-        if (!update) {
-          Alert.alert('app already update')
-        } else {
-          codePush.sync(
-            { updateDialog: true, installMode: codePush.InstallMode.IMMEDIATE },
-            (syncStatus) => {
-              Alert.alert(`status: ${syncStatus}`)
-              switch (syncStatus) {
-                case codePush.SyncStatus.UP_TO_DATE:
-                  Alert.alert('UP_TO_DATE')
-                  break
-                case codePush.SyncStatus.UPDATE_INSTALLED:
-                  Alert.alert('UPDATE_INSTALLED')
-                  break
-                case codePush.SyncStatus.UPDATE_IGNORED:
-                  Alert.alert('UPDATE_IGNORED')
-                  break
-                case codePush.SyncStatus.UNKNOWN_ERROR:
-                  Alert.alert('UNKNOWN_ERROR')
-                  break
-                case codePush.SyncStatus.SYNC_IN_PROGRESS:
-                  Alert.alert('SYNC_IN_PROGRESS')
-                  break
-                case codePush.SyncStatus.CHECKING_FOR_UPDATE:
-                  Alert.alert('CHECKING_FOR_UPDATE')
-                  break
-                case codePush.SyncStatus.AWAITING_USER_ACTION:
-                  Alert.alert('AWAITING_USER_ACTION')
-                  break
-                case codePush.SyncStatus.DOWNLOADING_PACKAGE:
-                  Alert.alert('DOWNLOADING_PACKAGE')
-                  break
-                case codePush.SyncStatus.INSTALLING_UPDATE:
-                  Alert.alert('INSTALLING_UPDATE')
-                  break
-              }
-            },
-          )
+    codePush.sync(
+      { updateDialog: true, installMode: codePush.InstallMode.IMMEDIATE },
+      (syncStatus) => {
+        Alert.alert(`status: ${syncStatus}`)
+        switch (syncStatus) {
+          case codePush.SyncStatus.UP_TO_DATE:
+            Alert.alert('UP_TO_DATE')
+            break
+          case codePush.SyncStatus.UPDATE_INSTALLED:
+            Alert.alert('UPDATE_INSTALLED')
+            break
+          case codePush.SyncStatus.UPDATE_IGNORED:
+            Alert.alert('UPDATE_IGNORED')
+            break
+          case codePush.SyncStatus.UNKNOWN_ERROR:
+            Alert.alert('UNKNOWN_ERROR')
+            break
+          case codePush.SyncStatus.SYNC_IN_PROGRESS:
+            Alert.alert('SYNC_IN_PROGRESS')
+            break
+          case codePush.SyncStatus.CHECKING_FOR_UPDATE:
+            Alert.alert('CHECKING_FOR_UPDATE')
+            break
+          case codePush.SyncStatus.AWAITING_USER_ACTION:
+            Alert.alert('AWAITING_USER_ACTION')
+            break
+          case codePush.SyncStatus.DOWNLOADING_PACKAGE:
+            Alert.alert('DOWNLOADING_PACKAGE')
+            break
+          case codePush.SyncStatus.INSTALLING_UPDATE:
+            Alert.alert('INSTALLING_UPDATE')
+            break
         }
       },
-    ).catch((error) => {
-      Alert.alert(`check update error: ${error}`)
-    })
+    );
   }
 
   render () {
@@ -100,5 +89,5 @@ const styles = StyleSheet.create({
 })
 
 
-const codePushOptions = { checkFrequency: codePush.CheckFrequency.ON_APP_START }
+const codePushOptions = { checkFrequency: codePush.CheckFrequency.MANUAL }
 AppRegistry.registerComponent('mjpet', () => codePush(codePushOptions)(App))
